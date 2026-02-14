@@ -68,12 +68,12 @@ describe WordGuesserGame do
         expect(@game.wrong_guesses).to eq('q')
       end
 
-      it 'returns false', pending: true do
+      it 'returns false' do
         expect(@game.guess('a')).to be false
         expect(@game.guess('q')).to be false
       end
 
-      it 'is case insensitive', pending: true do
+      it 'is case insensitive' do
         expect(@game.guess('A')).to be false
         expect(@game.guess('Q')).to be false
         expect(@game.guesses).not_to include('A')
@@ -100,7 +100,7 @@ describe WordGuesserGame do
     end
   end
 
-  describe 'displayed word with guesses', pending: true do
+  describe 'displayed word with guesses' do
     before do
       @game = described_class.new('banana')
     end
@@ -124,17 +124,17 @@ describe WordGuesserGame do
       @game = described_class.new('dog')
     end
 
-    it 'is win when all letters guessed', pending: true do
+    it 'is win when all letters guessed' do
       guess_several_letters(@game, 'ogd')
       expect(@game.check_win_or_lose).to eq(:win)
     end
 
-    it 'is lose after 7 incorrect guesses', pending: true do
+    it 'is lose after 7 incorrect guesses' do
       guess_several_letters(@game, 'tuvwxyz')
       expect(@game.check_win_or_lose).to eq(:lose)
     end
 
-    it 'continues play if neither win nor lose', pending: true do
+    it 'continues play if neither win nor lose' do
       guess_several_letters(@game, 'do')
       expect(@game.check_win_or_lose).to eq(:play)
     end

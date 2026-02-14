@@ -8,38 +8,49 @@ class WordGuesserGame
     if word == nil
       raise(ArgumentError)
     end
+    word = word.downcase
     @word = word
     @guesses = ''
     @wrong_guesses = ''
-    @number_of_guesses = 0
-    @state = :play
   end
 
   def guess(letter)
     unless letter != nil && letter.match?(/[[:alpha:]]/) && letter.size == 1
       raise(ArgumentError)
     end
-
+    letter = letter.downcase
     if @guesses.include?(letter) || @wrong_guesses.include?(letter)
       return false
     end
 
     if @word.include?(letter)
       @guesses << letter
-      @number_of_guesses += 1
     else
       @wrong_guesses << letter
-      @number_of_guesses += 1
     end
-    return true
+    true
   end
 
   def check_win_or_lose
-    @state
+    if @wrong_guesses.size >= 7
+      :lose
+    elsif @word.chars.all? { |letter| @guesses.include?(letter) }
+      :win
+    else
+      :play
+    end
   end
 
-  def to_s
-    # blank
+  def word_with_guesses
+    output = ''
+    @word.chars do |letter|
+      if @guesses.include?(letter)
+        output << letter
+      else
+        output << '-'
+      end
+    end
+    output
   end
 
   attr_accessor :word, :guesses, :wrong_guesses
