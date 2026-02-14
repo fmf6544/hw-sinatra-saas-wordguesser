@@ -19,19 +19,19 @@ describe WordGuesserGame do
     end
   end
 
-  describe 'guessing', pending: true do
+  describe 'guessing' do
     context 'correctly' do
       before do
         @game = described_class.new('garply')
         @valid = @game.guess('a')
       end
 
-      it 'changes correct guess list', pending: true do
+      it 'changes correct guess list' do
         expect(@game.guesses).to eq('a')
         expect(@game.wrong_guesses).to eq('')
       end
 
-      it 'returns true', pending: true do
+      it 'returns true' do
         expect(@valid).not_to be false
       end
     end
@@ -42,12 +42,12 @@ describe WordGuesserGame do
         @valid = @game.guess('z')
       end
 
-      it 'changes wrong guess list', pending: true do
+      it 'changes wrong guess list' do
         expect(@game.guesses).to eq('')
         expect(@game.wrong_guesses).to eq('z')
       end
 
-      it 'returns true', pending: true do
+      it 'returns true' do
         expect(@valid).not_to be false
       end
     end
@@ -58,12 +58,12 @@ describe WordGuesserGame do
         guess_several_letters(@game, 'aq')
       end
 
-      it 'does not change correct guess list', pending: true do
+      it 'does not change correct guess list' do
         @game.guess('a')
         expect(@game.guesses).to eq('a')
       end
 
-      it 'does not change wrong guess list', pending: true do
+      it 'does not change wrong guess list' do
         @game.guess('q')
         expect(@game.wrong_guesses).to eq('q')
       end
@@ -86,15 +86,15 @@ describe WordGuesserGame do
         @game = described_class.new('foobar')
       end
 
-      it 'throws an error when empty', pending: true do
+      it 'throws an error when empty' do
         expect { @game.guess('') }.to raise_error(ArgumentError)
       end
 
-      it 'throws an error when not a letter', pending: true do
+      it 'throws an error when not a letter' do
         expect { @game.guess('%') }.to raise_error(ArgumentError)
       end
 
-      it 'throws an error when nil', pending: true do
+      it 'throws an error when nil' do
         expect { @game.guess(nil) }.to raise_error(ArgumentError)
       end
     end
