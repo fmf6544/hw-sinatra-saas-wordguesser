@@ -65,20 +65,25 @@ class WordGuesserApp < Sinatra::Base
     if status == :win
       redirect '/win'
     elsif status == :lose
-      redirect 'lose'
+      redirect '/lose'
     else
       erb :show
     end
   end
 
   get '/win' do
-    redirect '/show' unless @game.check_win_or_lose == :win
-    erb :win
+    if @game.check_win_or_lose == :win
+      erb :win
+    else
+      redirect '/show'
+    end
   end
 
   get '/lose' do
-    ### YOUR CODE HERE ###
-    redirect '/show' unless @game.check_win_or_lose == :lose
-    erb :lose
+    if @game.check_win_or_lose == :lose
+      erb :lose
+    else
+      redirect '/show'
+    end
   end
 end
